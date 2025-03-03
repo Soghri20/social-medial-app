@@ -1,9 +1,24 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { FcGoogle } from "react-icons/fc";
+import { supabase } from '../utils/supabase';
 
 
 const Login = () => {
+  
+    const handleGoogleSignIn = async () => {
+      const {user, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: "http://localhost:3000/home-page", // Optional: You can specify a redirect URL here.
+        },
+      });
+      console.log(user)
+
+  
+      if (error) console.error('Erreur de connexion :', error.message);
+    };
+  
   return (
     <section className='w-full bg-white min-h-screen flex flex-col'>
     <nav className='flex items-center space-x-2 p-4'>
@@ -26,9 +41,9 @@ const Login = () => {
       </div>
       <div className='relative group overflow-hidden rounded-lg md:w-1/2 shadow-md border-gray-100 border-2 mt-2'>
       <div className="p-1 bg-gradient-to-tr from-orange-700 via-blue-500 to-green-600 bg-[length:200%] animate-gradient rounded-md">
-        <button className="bg-black flex justify-center shadow-lg rounded-md px-3 py-1 shadow-md flex items-center  text-white font-thin text-sm w-full">
+        <button onClick={handleGoogleSignIn} className="bg-black flex justify-center shadow-lg rounded-md px-3 py-1 shadow-md flex items-center  text-white font-thin text-sm w-full">
         <FcGoogle className='mr-2' />
-         <p className='text-lg'>Google</p>
+         <p className='text-lg' >Google</p>
        </button>
       </div>
 
