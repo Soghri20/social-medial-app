@@ -10,7 +10,7 @@ const Login = () => {
       const {user, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: "http://localhost:3000/home-page", // Optional: You can specify a redirect URL here.
+          redirectTo: "https://sm-ashy.vercel.app//home-page", // Optional: You can specify a redirect URL here.
         },
       });
       console.log(user)
